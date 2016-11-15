@@ -1,0 +1,48 @@
+2016-11-15T14:19:51.373073996 0.094803s notice: Recursively removing directory /home/yashas/itl/rethinkdb_data/tmp
+2016-11-15T14:19:51.390063854 0.111792s notice: Initializing directory /home/yashas/itl/rethinkdb_data
+2016-11-15T14:19:51.390370523 0.112098s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/home/yashas/itl/rethinkdb_data' did not already exist or is empty.)
+2016-11-15T14:19:51.390704391 0.112432s notice: Running rethinkdb 2.3.5~0xenial (GCC 5.3.1)...
+2016-11-15T14:19:51.401478022 0.123213s notice: Running on Linux 4.4.0-47-generic x86_64
+2016-11-15T14:19:51.401685778 0.123413s notice: Loading data from directory /home/yashas/itl/rethinkdb_data
+2016-11-15T14:19:51.479422199 0.201149s info: Automatically using cache size of 2145 MB
+2016-11-15T14:19:51.481765356 0.203492s notice: Listening for intracluster connections on port 29015
+2016-11-15T14:19:51.487556546 0.209283s notice: Listening for client driver connections on port 28015
+2016-11-15T14:19:51.488039935 0.209766s notice: Listening for administrative HTTP connections on port 8080
+2016-11-15T14:19:51.488050174 0.209776s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-15T14:19:51.488061934 0.209788s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-15T14:19:51.488071002 0.209797s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-15T14:19:51.488082797 0.209809s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2016-11-15T14:19:51.488095883 0.209822s notice: Server ready, "yashas_notebook_gqe" 2565a840-403a-4550-9179-3307b401f860
+2016-11-15T14:29:27.888051529 576.609778s info: Table 04d3f81e-57f3-416f-89d5-fc00db63fcee: Starting a new Raft election for term 1.
+2016-11-15T14:29:27.893408361 576.615135s info: Table 04d3f81e-57f3-416f-89d5-fc00db63fcee: Added replica on this server.
+2016-11-15T14:29:27.894523657 576.616250s info: Table 04d3f81e-57f3-416f-89d5-fc00db63fcee: This server is Raft leader for term 1. Latest log index is 0.
+2016-11-15T14:31:53.313162048 722.034888s notice: Removing file /home/yashas/itl/rethinkdb_data/04d3f81e-57f3-416f-89d5-fc00db63fcee
+2016-11-15T14:31:53.313167234 722.034893s info: Table 04d3f81e-57f3-416f-89d5-fc00db63fcee: Deleted the table.
+2016-11-15T14:31:59.797614352 728.519342s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2016-11-15T14:31:59.797957728 728.519684s notice: Shutting down client connections...
+2016-11-15T14:31:59.798246847 728.519973s notice: All client connections closed.
+2016-11-15T14:31:59.798255128 728.519981s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2016-11-15T14:31:59.799369547 728.521096s notice: Storage engine shut down.
+2016-11-15T15:37:05.405841571 0.058139s notice: Running rethinkdb 2.3.5~0xenial (GCC 5.3.1)...
+2016-11-15T15:37:05.414727482 0.067032s notice: Running on Linux 4.4.0-47-generic x86_64
+2016-11-15T15:37:05.414896038 0.067194s notice: Loading data from directory /home/yashas/itl/rethinkdb_data
+2016-11-15T15:37:05.458878831 0.111177s info: Automatically using cache size of 1876 MB
+2016-11-15T15:37:05.461677426 0.113975s notice: Listening for intracluster connections on port 29015
+2016-11-15T15:37:05.465331710 0.117630s notice: Listening for client driver connections on port 28015
+2016-11-15T15:37:05.465916126 0.118214s notice: Listening for administrative HTTP connections on port 8080
+2016-11-15T15:37:05.465927106 0.118224s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-15T15:37:05.465943026 0.118240s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-15T15:37:05.465952163 0.118249s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-15T15:37:05.465965180 0.118262s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2016-11-15T15:37:05.465977674 0.118275s notice: Server ready, "yashas_notebook_gqe" 2565a840-403a-4550-9179-3307b401f860
+2016-11-15T16:05:12.983466369 1687.635764s info: Table c0bef038-4b17-4905-8274-46bffdd2ef08: Starting a new Raft election for term 1.
+2016-11-15T16:05:12.984216321 1687.636513s info: Table c0bef038-4b17-4905-8274-46bffdd2ef08: Added replica on this server.
+2016-11-15T16:05:12.990762435 1687.643060s info: Table c0bef038-4b17-4905-8274-46bffdd2ef08: This server is Raft leader for term 1. Latest log index is 0.
+2016-11-15T16:05:23.476792702 1698.129091s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: Starting a new Raft election for term 1.
+2016-11-15T16:05:23.479173606 1698.131472s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: Added replica on this server.
+2016-11-15T16:05:23.492873326 1698.145171s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: This server is Raft leader for term 1. Latest log index is 0.
+2016-11-15T16:38:31.953363731 3686.605661s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: Starting a new Raft election for term 1.
+2016-11-15T16:38:31.953526272 3686.605823s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: Added replica on this server.
+2016-11-15T16:38:31.965679487 3686.617977s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: This server is Raft leader for term 1. Latest log index is 0.
+2016-11-15T16:48:58.951846694 4313.604145s notice: Removing file /home/yashas/itl/rethinkdb_data/c0bef038-4b17-4905-8274-46bffdd2ef08
+2016-11-15T16:48:58.952148458 4313.604446s info: Table c0bef038-4b17-4905-8274-46bffdd2ef08: Deleted the table.

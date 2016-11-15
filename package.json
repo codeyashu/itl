@@ -1,5 +1,5 @@
 {
-  "name": "smartlights",
+  "name": "itl",
   "version": "1.0.0",
   "description": "DONT README!",
   "main": "server.js",
@@ -18,8 +18,13 @@
   "homepage": "https://gitlab.com/codeyashu/smartlights#README",
   "dependencies": {
     "@google/maps": "^0.3.0",
+    "body-parser": "^1.15.2",
+    "ejs": "^2.5.2",
     "express": "^4.14.0",
+    "express-ejs-layouts": "^2.2.0",
     "nodemon": "^1.11.0",
-    "rethinkdbdash": "^2.3.26"
+    "path": "^0.12.7",
+    "rethinkdbdash": "^2.3.26",
+    "socket.io": "^1.5.1"
   }
 }

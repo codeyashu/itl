@@ -1,0 +1,1 @@
+//find four critical points
