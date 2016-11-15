@@ -1,0 +1,25 @@
+{
+  "name": "smartlights",
+  "version": "1.0.0",
+  "description": "DONT README!",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/codeyashu/smartlights.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/codeyashu/smartlights/issues"
+  },
+  "homepage": "https://gitlab.com/codeyashu/smartlights#README",
+  "dependencies": {
+    "@google/maps": "^0.3.0",
+    "express": "^4.14.0",
+    "nodemon": "^1.11.0",
+    "rethinkdbdash": "^2.3.26"
+  }
+}
