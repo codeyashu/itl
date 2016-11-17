@@ -31,17 +31,14 @@ const fpoints = require('./app/fpoints');
 //database query
 const query = require('./app/query');
 
-console.log(fdistance)
-function getSignalList(){
-  console.log(query.companyList());
-}
-
-
-  
-
-function my(data){
-  return data;
-}
+query.signal(function(err, data){
+      if(err) {
+         console.log(err);
+      } 
+      else {
+        console.log(data.slen);
+      }
+});
 
 
 

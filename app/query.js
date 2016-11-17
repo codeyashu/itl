@@ -6,53 +6,35 @@ var r = require('rethinkdbdash')({
     db: 'itl'
 });
 
-/*
-exports.signalList = function signalList(){
-    r.table('trafficSignal').run()
-    .then(function(response){
-        console.log(response);
-       return {
-         
-         slist: response,
-         slen: Object.keys(response).length
-      };
-     //next(null, list);
-   })
-  .error(function(err){
-     console.log(err);
-     //next(err);
-  })   
-}
-
-function ambulanceList(){
-    r.table('ambulance').run()
-    .then(function(response){
-       return {
-         alist: response,
-         alen: Object.keys(response).length
-      };
-     //next(null, list);
-   })
-  .error(function(err){
-     console.log(err);
-     //next(err);
-  })   
-}
-
-
-module.exports = signalList();
-module.exports = ambulanceList();
-*/
-
-exports.companyList = function(){
+module.exports = {
+  signal : function(next){
     r.table('trafficSignal').run()
     .then(function(response){
        var list = {
-         clist: response,
-         clen: Object.keys(response).length,
-     };    
+         slist: response,
+         slen: Object.keys(response).length
+      };
+     next(null, list);
    })
   .error(function(err){
      console.log(err);
+     next(err);
   })   
-};
+},
+
+ambulance : function(next){
+    r.table('ambulance').run()
+    .then(function(response){
+       var list = {
+         alist: response,
+         alen: Object.keys(response).length
+      };
+     next(null, list);
+   })
+  .error(function(err){
+     console.log(err);
+     next(err);
+  })   
+}
+
+}
