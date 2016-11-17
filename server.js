@@ -24,19 +24,22 @@ app.use(express.static(__dirname + '/public'));
 
 //-- app folder files
 
-//distance between two coordinates
-const fdistance = require('./app/fdistance');
-//find four critical points 
-const fpoints = require('./app/fpoints');
+//all formulas
+const formula = require('./app/formula');
 //database query
 const query = require('./app/query');
 
+
+//find four critical points 
+const fdistance = require('./app/fpoints');
+
+
 query.signal(function(err, data){
       if(err) {
-         console.log(err);
+         console.log("failed to retrieve ambulance list" + err);
       } 
       else {
-        console.log(data.slen);
+        console.log("traffic signal list query successful");
       }
 });
 
