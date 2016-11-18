@@ -1,9 +1,9 @@
-//distance between two coordinates
-
+//--convert to radian
 function toradian(num){
                return num*Math.PI/180;
             }
 
+//--convert to degree
 function todegree(num){
                return num*180/Math.PI;
             }
@@ -11,6 +11,7 @@ function todegree(num){
 
 module.exports = {
 
+//--distance between two coordinates
   distance : function distance(lat1, lon1, lat2, lon2) {
                var p = 0.017453292519943295;    // Math.PI / 180
                var c = Math.cos;
@@ -19,7 +20,7 @@ module.exports = {
                       (1 - c((lon2 - lon1) * p))/2;
                return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
            },
-    
+ //--get critical points   
   points : function points(loc,t) {
               var lat = loc.lat;
               var lon = loc.long;
@@ -45,12 +46,9 @@ module.exports = {
                  plat[i] = todegree(plat[i]);
                  plon[i] = todegree(plon[i]);
              }
-
-          //var location = new LocationPackage(plat, plon, t);
-
               
               return { lat : plat,
-                       lon : plon,
+                       long : plon,
                        t : t
                      };
           }
