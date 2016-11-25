@@ -39,7 +39,7 @@ app.use('/',router);
 //public folder
 app.use(express.static(__dirname + '/public'));
 
-/*
+
 query.signal(function(err, data){
       if(err) {
          console.log("failed to retrieve ambulance list" + err);
@@ -48,19 +48,30 @@ query.signal(function(err, data){
         console.log("traffic signal list query successful");
       }
 });
-*/
-///---socket.io
+
+///--socket.io--//
 
 io.on('connection',function(socket){
-    console.log('a user connected');
-    
-    socket.on('disconnect',function(aaa){
+
+    socket.on('disconnect',function(){
         console.log('user disconnected');
     })
 
-    socket.on('chat message',function(msg){
-        console.log('message: ' + msg );
+   //
+    socket.on('createSignal',function(chosenSignal){
+        socket.join('traffic signal');
+        console.log(chosenSignal +' joined');
+        console.log(socket.id)
+        r.table('trafficSignal').get(chosenSignal.toString()).update({socketId: socket.id}).run(function(err,response){
+            if(err){
+               console.log('error updating socket id');
+            }
+            else{
+                console.log('socket id of signal '+ chosenSignal+' updated');
+            }
+        })
     })
+    
 
 })
 

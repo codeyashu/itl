@@ -32,15 +32,17 @@ router.post('/',function(req,res){
       else {
 
         for(i = 0; i < data.slen; i++){
-            console.log('checking id ' + data.slist[i].id)
+
             if(id===data.slist[i].id && authkey==='mayhem'){
-               res.render('pages/lights',{
-                 data : data.slist
+                console.log('Traffic Signal '+id +' granted')
+                res.render('pages/lights',{
+                data : data.slist[i]
               });
               return;
             }
         }
         res.render('pages/denied');
+        console.log('Access Denied!');
       }
    });
 });

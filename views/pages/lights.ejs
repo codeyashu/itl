@@ -7,4 +7,26 @@
         <div class="hero">
             Lights whoaaaaaaaaa!!!
         </div>
+        <div class="signalInfo">
+           <ul>
+             <li> Signal ID: <%= data.id %> </li>
+             <li> Location: <%= data.location.lat %>, <%= data.location.long %>  </li>
+             <li> Place: <%= data.place %> </li>
+             <li> Service: <%= data.service %> </li>
+            </ul>
+        </div>
    </lights>
+
+   <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+   <script>
+      var socket = io(); //.connect('http://localhost:3000')
+
+      socket.emit('createSignal',<%= data.id %>);
+     
+      socket.on('emergency', function(msg){
+        $('#messages').append($('<li>').text(msg));
+      });
+
+      
+
+   </script>
