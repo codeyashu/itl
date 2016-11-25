@@ -57,7 +57,6 @@ io.on('connection',function(socket){
         console.log('user disconnected');
     })
 
-   //
     socket.on('createSignal',function(chosenSignal){
         socket.join('traffic signal');
         console.log(chosenSignal +' joined');
@@ -71,10 +70,16 @@ io.on('connection',function(socket){
             }
         })
     })
+
+
+   aaa(); 
     
 
 })
 
+function aaa(){ 
+io.emit('emergency',"ulalalalalala");
+}
 
 server.listen(function(){
     console.log('Server started!')

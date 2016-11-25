@@ -3,7 +3,9 @@
 <!--main-->
   <%- contentFor('lights') %>
 
-   <lights id="head">    
+   <lights>
+
+     <div class="container">
         <div class="hero">
             Lights whoaaaaaaaaa!!!
         </div>
@@ -15,18 +17,135 @@
              <li> Service: <%= data.service %> </li>
             </ul>
         </div>
+        
+
+      <div id="signalLights">
+
+        <div id="s1" class="signal col-md-2">
+          <div class="sideName"> 1 </div>
+          <div id="s1r" class="light red"></div>
+          <div id="s1y" class="light yellow"></div>
+          <div id="s1g" class="light green"></div>
+        </div>
+
+        <div id="s2" class="signal col-md-2">
+          <div class="sideName"> 2 </div>
+          <div id="s2r" class="light red"></div>
+          <div id="s2y" class="light yellow"></div>
+          <div id="s2g" class="light green"></div>
+        </div>
+
+        <div id="s3" class="signal col-md-2">
+          <div class="sideName"> 3 </div>
+          <div id="s3r" class="light red"></div>
+          <div id="s3y" class="light yellow"></div>
+          <div id="s3g" class="light green"></div>
+        </div>
+
+        <div id="s4" class="signal col-md-2">
+          <div class="sideName"> 4 </div>
+          <div id="s4r" class="light red"></div>
+          <div id="s4y" class="light yellow"></div>
+          <div id="s4g" class="light green"></div>
+        </div>
+
+       </div>
+
+    </div>
+
    </lights>
 
+  
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
    <script>
       var socket = io(); //.connect('http://localhost:3000')
 
       socket.emit('createSignal',<%= data.id %>);
      
       socket.on('emergency', function(msg){
-        $('#messages').append($('<li>').text(msg));
+       console.log("message   "+msg);
+      });
+    
+            
+            var r1 = $("#s1r");
+            var r2 = $("#s2r");
+            var r3 = $("#s3r");
+            var r4 = $("#s4r");
+
+            var y1 = $("#s1y");
+            var y2 = $("#s2y");
+            var y3 = $("#s3y");
+            var y4 = $("#s4y");
+
+            var g1 = $("#s1g");
+            var g2 = $("#s2g");
+            var g3 = $("#s3g");
+            var g4 = $("#s4g");
+
+            r1.css("background-color", "red");
+            r2.css("background-color", "red");
+            r3.css("background-color", "red");
+            r4.css("background-color", "red");
+
+          function startlights(){
+
+            socket.on('emergency', function(msg){
+       console.log("mayhem  "+msg);
       });
 
-      
 
-   </script>
+            setTimeout(function(){
+                r1.css("background-color", "black");
+                g1.css("background-color","green");
+                r4.css("background-color", "red");
+                y4.css("background-color","black");
+
+            },1000);
+            setTimeout(function(){
+                g1.css("background-color","black");
+                y1.css("background-color","yellow");
+            },5000);
+            setTimeout(function(){
+                r1.css("background-color", "red");
+                y1.css("background-color","black");
+                r2.css("background-color", "black");
+                g2.css("background-color","green");
+            },6000);
+            setTimeout(function(){
+                y2.css("background-color","yellow");
+                g2.css("background-color","black");
+            },10000);
+            setTimeout(function(){
+                y2.css("background-color","black");
+                r2.css("background-color", "red");
+                g3.css("background-color","green");
+                r3.css("background-color", "black");
+            },11000);
+            setTimeout(function(){
+                y3.css("background-color","yellow");
+                g3.css("background-color", "black");
+                
+            },15000);
+            setTimeout(function(){
+                y3.css("background-color","black");
+                r3.css("background-color", "red");
+                g4.css("background-color","green");
+                r4.css("background-color", "black");
+            },16000);
+            setTimeout(function(){
+                y4.css("background-color","yellow");
+                g4.css("background-color", "black");
+            },20000);
+
+       }
+
+       startlights();
+       var repeatLights = setInterval(startlights,20000);
+
+ 
+        //   clearInterval(repeatLights);
+
+    </script>
