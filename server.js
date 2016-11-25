@@ -21,19 +21,25 @@ app.use(expressLayouts);
 //use bodyParser
 app.use(bodyParser.urlencoded({extended: true}));
 
-//public folder
-app.use(express.static(__dirname + '/public'));
-
-//-- app folder files
+//-- app folder files --//
 
 //all formulas
 const formula = require('./app/formula');
 //database query
 const query = require('./app/query');
 
-
 //find four critical points 
 const fdistance = require('./app/fpoints');
+
+//routes
+var router = require('./app/routes');
+app.use('/',router);
+
+
+//public folder
+app.use(express.static(__dirname + '/public'));
+
+
 
 
 query.signal(function(err, data){
@@ -44,12 +50,6 @@ query.signal(function(err, data){
         console.log("traffic signal list query successful");
       }
 });
-
-
-app.get('/',function(req,res){
-    res.render('pages/home')
-})
-
 
 ///---socket.io
 

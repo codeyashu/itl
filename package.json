@@ -24,6 +24,7 @@
     "express-ejs-layouts": "^2.2.0",
     "nodemon": "^1.11.0",
     "path": "^0.12.7",
+    "request": "^2.79.0",
     "rethinkdbdash": "^2.3.26",
     "socket.io": "^1.5.1"
   }
