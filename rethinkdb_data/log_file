@@ -186,3 +186,31 @@
 2016-11-25T10:42:20.364548446 1.989726s info: Table 9ad4c696-52c3-4e09-944f-3368c8d2cd29: This server is Raft leader for term 6. Latest log index is 14.
 2016-11-25T10:42:20.477640990 2.102818s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: Starting a new Raft election for term 7.
 2016-11-25T10:42:20.492324271 2.117502s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: This server is Raft leader for term 7. Latest log index is 18.
+2016-11-25T19:54:33.061098387 29472.072485s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2016-11-25T19:54:33.061314788 29472.072701s notice: Shutting down client connections...
+2016-11-25T19:54:33.061660879 29472.073047s notice: All client connections closed.
+2016-11-25T19:54:33.061671589 29472.073056s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2016-11-25T19:54:33.088406571 29472.099793s notice: Storage engine shut down.
+2016-11-25T20:13:12.725739670 0.054262s notice: Running rethinkdb 2.3.5~0xenial (GCC 5.3.1)...
+2016-11-25T20:13:12.733035389 0.061564s notice: Running on Linux 4.4.0-47-generic x86_64
+2016-11-25T20:13:12.733191986 0.061714s notice: Loading data from directory /home/yashas/itl/rethinkdb_data
+2016-11-25T20:13:12.766940997 0.095463s info: Automatically using cache size of 2041 MB
+2016-11-25T20:13:12.768200715 0.096723s notice: Listening for intracluster connections on port 29015
+2016-11-25T20:13:12.809737950 0.138260s notice: Listening for client driver connections on port 28015
+2016-11-25T20:13:12.809854729 0.138377s notice: Listening for administrative HTTP connections on port 8080
+2016-11-25T20:13:12.809857480 0.138379s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-25T20:13:12.810044300 0.138566s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-25T20:13:12.810049288 0.138571s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-25T20:13:12.810052051 0.138574s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2016-11-25T20:13:12.810054874 0.138577s notice: Server ready, "yashas_notebook_gqe" 2565a840-403a-4550-9179-3307b401f860
+2016-11-25T20:13:14.118305458 1.446828s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: Starting a new Raft election for term 8.
+2016-11-25T20:13:14.133041198 1.461564s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: This server is Raft leader for term 8. Latest log index is 21.
+2016-11-25T20:13:14.503332779 1.831856s info: Table 9ad4c696-52c3-4e09-944f-3368c8d2cd29: Starting a new Raft election for term 7.
+2016-11-25T20:13:14.517769268 1.846293s info: Table 9ad4c696-52c3-4e09-944f-3368c8d2cd29: This server is Raft leader for term 7. Latest log index is 17.
+2016-11-25T20:13:14.643825076 1.972348s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: Starting a new Raft election for term 8.
+2016-11-25T20:13:14.666792589 1.995316s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: This server is Raft leader for term 8. Latest log index is 21.
+2016-11-25T20:17:46.890628312 274.219152s notice: Server got SIGINT from pid 0, uid 0; shutting down...
+2016-11-25T20:17:46.891042919 274.219566s notice: Shutting down client connections...
+2016-11-25T20:17:46.892853271 274.221377s notice: All client connections closed.
+2016-11-25T20:17:46.892868140 274.221390s notice: Shutting down storage engine... (This may take a while if you had a lot of unflushed data in the writeback cache.)
+2016-11-25T20:17:46.909623522 274.238147s notice: Storage engine shut down.

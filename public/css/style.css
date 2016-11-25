@@ -3,3 +3,25 @@
 lights .signalInfo{
     background-color: deepskyblue;
 }
+
+
+/*-----lightssssssssss------*/
+.signal{
+     /*  width: 200px;
+       height: 600px;  */
+       float: left;
+       border: 10px solid black;
+       background-color: #D3D3D3;
+    }
+
+.light{
+      	width: 120px;
+	    height: 120px;
+       -moz-border-radius: 60px;
+	    -webkit-border-radius: 60px;
+	    border-radius: 60px;
+        border: 2px solid black;
+        margin-left: 0px;
+        margin-top: 20px;
+        background-color: black;
+    }
