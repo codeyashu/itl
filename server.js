@@ -10,7 +10,9 @@ const r = require('rethinkdbdash')({
 });
 
 const app = module.exports = express();
-const server = require('http').Server(app);
+const server = app.listen(3000);
+const io = require('socket.io').listen(server);
+
 
 //--use ejs and express layouts
 app.set('view engine','ejs');
@@ -44,11 +46,27 @@ query.signal(function(err, data){
 });
 
 
-
 app.get('/',function(req,res){
     res.render('pages/home')
 })
 
-app.listen(3000,function(){
-    console.log('Server started!')
+
+///---socket.io
+
+io.on('connection',function(socket){
+    console.log('a user connected');
+    
+    socket.on('disconnect',function(aaa){
+        console.log('user disconnected');
+    })
+
+    socket.on('chat message',function(msg){
+        console.log('message: ' + msg );
+    })
+
 })
+
+
+server.listen(function(){
+    console.log('Server started!')
+});
