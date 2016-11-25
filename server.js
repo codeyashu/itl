@@ -39,9 +39,7 @@ app.use('/',router);
 //public folder
 app.use(express.static(__dirname + '/public'));
 
-
-
-
+/*
 query.signal(function(err, data){
       if(err) {
          console.log("failed to retrieve ambulance list" + err);
@@ -50,7 +48,7 @@ query.signal(function(err, data){
         console.log("traffic signal list query successful");
       }
 });
-
+*/
 ///---socket.io
 
 io.on('connection',function(socket){
