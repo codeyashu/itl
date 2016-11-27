@@ -90,62 +90,67 @@
             r3.css("background-color", "red");
             r4.css("background-color", "red");
 
-          function startlights(){
-
-            socket.on('emergency', function(msg){
-       console.log("mayhem  "+msg);
-      });
-
-
+      function startlights(){
+         var timeouts = [
             setTimeout(function(){
                 r1.css("background-color", "black");
                 g1.css("background-color","green");
                 r4.css("background-color", "red");
                 y4.css("background-color","black");
-
-            },1000);
+            },1000),
             setTimeout(function(){
                 g1.css("background-color","black");
                 y1.css("background-color","yellow");
-            },5000);
+            },5000),
             setTimeout(function(){
                 r1.css("background-color", "red");
                 y1.css("background-color","black");
                 r2.css("background-color", "black");
                 g2.css("background-color","green");
-            },6000);
+            },6000),
             setTimeout(function(){
                 y2.css("background-color","yellow");
                 g2.css("background-color","black");
-            },10000);
+            },10000),
             setTimeout(function(){
                 y2.css("background-color","black");
                 r2.css("background-color", "red");
                 g3.css("background-color","green");
                 r3.css("background-color", "black");
-            },11000);
+            },11000),
             setTimeout(function(){
                 y3.css("background-color","yellow");
-                g3.css("background-color", "black");
-                
-            },15000);
+                g3.css("background-color", "black");    
+            },15000),
             setTimeout(function(){
                 y3.css("background-color","black");
                 r3.css("background-color", "red");
                 g4.css("background-color","green");
                 r4.css("background-color", "black");
-            },16000);
+            },16000),
             setTimeout(function(){
                 y4.css("background-color","yellow");
                 g4.css("background-color", "black");
-            },20000);
+            },20000)
+          ];  
 
+          var repeatLight = setTimeout(startlights,20000);   
+
+          socket.on('emergency', function(msg){
+               for (var i = 0; i < timeouts.length; ++i)
+                 clearTimeout(timeouts[i]);
+               clearTimeout(repeatLight);
+               //console.log("mayhem  "+msg);
+               console.log("yay! stopped");
+            })
        }
 
-       startlights();
-       var repeatLights = setInterval(startlights,20000);
+       
+       socket.on('cleared', function(msg){
+               console.log("saved!!");
+               startlights();
+            });
 
- 
-        //   clearInterval(repeatLights);
+       startlights();
 
     </script>
