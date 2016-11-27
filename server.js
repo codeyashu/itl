@@ -75,12 +75,15 @@ io.on('connection',function(socket){
 
 })
 
+/*
 setInterval(function(){ 
 io.emit('emergency',"ulalalalalala")
 },45000)
 setInterval(function(){ 
 io.emit('cleared',"lalala")
 },100000)
+
+*/
 
 server.listen(function(){
     console.log('Server started!')
