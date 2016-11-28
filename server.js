@@ -39,15 +39,38 @@ app.use('/',router)
 //public folder
 app.use(express.static(__dirname + '/public'))
 
-
+//traffic signal list
 query.signal(function(err, data){
       if(err) {
          console.log("failed to retrieve ambulance list" + err)
       } 
       else {
         console.log("traffic signal list query successful")
+        global.slist = data.slist;
+        global.slen = data.slen;
       }
 })
+
+//get nearest traffic Signal
+function getnearest(location){
+     var min = 1000;
+     var lat = location.lat;
+     var long = location.long;
+           
+     for(let i = 0; i < global.slen; i++){
+        (function(){
+            var distance = formula.distance(lat,long,global.slist[i].lat,global.slist[i].long);
+            if(distance < min){
+               min = distance;
+               var sid = global.slist[i].id;
+            }
+        }());
+     }
+     return {
+         distance : min,
+         sid : sid
+     }
+}
 
 ///--socket.io--//
 
@@ -71,9 +94,31 @@ io.on('connection',function(socket){
         })
     })
 
-    
+    socket.on('createAmbulance',function(chosenAmbulance){
+        socket.join('emergency ambulance')
+        console.log('Ambulance '+chosenAmbulance+' in emergency')
+    })
 
+   
+  
+    socket.on('location sent',function(location){
+
+          var nearest = getnearest(location);
+            console.log(nearest.distance);
+
+          
+         })
+      
 })
+
+
+
+setTimeout(function(){
+console.log(global.slist[0].id)
+console.log(global.slen)},1500);
+
+
+
 
 /*
 setInterval(function(){ 
