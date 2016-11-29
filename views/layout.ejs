@@ -9,6 +9,12 @@
 
     <link href="/css/bootstrap.min.css" rel="stylesheet"> 
     <link href="/css/style.css" rel="stylesheet"> 
+    <style>
+       #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
   </head>
 
   <body>
@@ -28,6 +34,9 @@
 
     <!--Access Denied page-->
       <%- defineContent('denied') %>
+
+       <!--signal map page-->
+      <%- defineContent('signalmap') %>
 
     <!--footer-->
        <footer>

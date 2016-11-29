@@ -35,7 +35,6 @@ const fdistance = require('./app/fpoints')
 var router = require('./app/routes')
 app.use('/',router)
 
-
 //public folder
 app.use(express.static(__dirname + '/public'))
 
@@ -50,6 +49,7 @@ query.signal(function(err, data){
         global.slen = data.slen;
       }
 })
+
 
 //get nearest traffic Signal
 function getnearest(location){

@@ -250,3 +250,22 @@
 2016-11-28T22:04:12.182277604 3.739140s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: This server is Raft leader for term 10. Latest log index is 27.
 2016-11-28T22:04:14.389658408 4.362785s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: Starting a new Raft election for term 10.
 2016-11-28T22:04:14.395057462 4.368184s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: This server is Raft leader for term 10. Latest log index is 27.
+2016-11-29T11:47:17.525672180 40.053340s notice: Running rethinkdb 2.3.5~0xenial (GCC 5.3.1)...
+2016-11-29T11:47:17.536714212 40.064388s notice: Running on Linux 4.4.0-47-generic x86_64
+2016-11-29T11:47:17.536938993 40.064606s notice: Loading data from directory /home/yashas/itl/rethinkdb_data
+2016-11-29T11:47:17.586981218 40.114650s info: Automatically using cache size of 1810 MB
+2016-11-29T11:47:17.587776161 40.115443s notice: Listening for intracluster connections on port 29015
+2016-11-29T11:47:17.630708009 40.158375s notice: Listening for client driver connections on port 28015
+2016-11-29T11:47:17.630894025 40.158561s notice: Listening for administrative HTTP connections on port 8080
+2016-11-29T11:47:17.630910928 40.158577s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-29T11:47:17.630914121 40.158580s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-29T11:47:17.630916491 40.158583s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-29T11:47:17.630918682 40.158585s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2016-11-29T11:47:17.630921978 40.158588s notice: Server ready, "yashas_notebook_gqe" 2565a840-403a-4550-9179-3307b401f860
+2016-11-29T11:47:18.816621285 41.344288s info: Table 9ad4c696-52c3-4e09-944f-3368c8d2cd29: Starting a new Raft election for term 10.
+2016-11-29T11:47:18.830650535 41.358317s info: Table 9ad4c696-52c3-4e09-944f-3368c8d2cd29: This server is Raft leader for term 10. Latest log index is 26.
+2016-11-29T11:47:19.563796757 42.091465s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: Starting a new Raft election for term 11.
+2016-11-29T11:47:19.572623659 42.100291s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: This server is Raft leader for term 11. Latest log index is 30.
+2016-11-29T11:47:19.575130354 42.102798s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: Starting a new Raft election for term 11.
+2016-11-29T11:47:19.609907860 42.137574s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: This server is Raft leader for term 11. Latest log index is 30.
+2016-11-29T11:47:47.634901003 70.162568s warn: Problem when checking for new versions of RethinkDB: HTTP request to update.rethinkdb.com failed.

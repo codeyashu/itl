@@ -46,3 +46,15 @@ router.post('/',function(req,res){
       }
    });
 });
+router.get('/signalmap',function(req,res){
+    res.render('pages/signalmap',{
+       slist : global.slist,
+       slen : global.slen
+    })
+})
+
+/*
+setTimeout(function(){
+   console.log(global.slen)
+},3000)
+*/
