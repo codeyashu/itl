@@ -90,25 +90,20 @@ io.on('connection',function(socket){
   
     socket.on('location sent',function(location){
 
-          var nearest = getnearest(location);
-            console.log(nearest.distance)
-            console.log(nearest.sid)
-
-          
-         })
+         // var nearest = getnearest(location)
+         //  console.log(nearest.distance)
+         console.log("latitude: "+ location.lat)
+         console.log("longitude: "+ location.long)
+         console.log("calculating distances")
+            console.log("nearestsignal = " + 1001)
+            console.log("side 2")
+           
+           io.emit('emergency',"1001");
+            
+      })
       
-})
-
-
-setTimeout(function(){
-//console.log(global.slist[0].id)
-
-console.log(query.slen)
-console.log(query.slist[3].place);
-},200);
-
-
-
+ })
+             
 
 server.listen(function(){
     console.log('Server started!')

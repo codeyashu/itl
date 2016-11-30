@@ -11,6 +11,8 @@ const r = require('rethinkdbdash')({
     .then(function(response){
        module.exports.slist = response;
        module.exports.slen = Object.keys(response).length;
+       console.dir(response)
+       console.log("trafic signal query successful")
     })
     .error(function(err){
        console.log(err);

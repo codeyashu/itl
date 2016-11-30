@@ -40,12 +40,10 @@ router.post('/',function(req,res){
 });
 
 
-
-//console.log()
 router.get('/signalmap',function(req,res){
+    console.log('traffic signal map page served')
     res.render('pages/signalmap',{
        slist : query.slist,
        slen : query.slen
     })
 })
-
