@@ -104,6 +104,7 @@ setTimeout(function(){
 //console.log(global.slist[0].id)
 
 console.log(query.slen)
+console.log(query.slist[3].place);
 },200);
 
 

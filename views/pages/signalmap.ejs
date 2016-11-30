@@ -5,29 +5,34 @@
 
    <main id="sitemain">    
         <div class="hero">
-            <%= slist[0].id %>
+           Locations of Intelligent Traffic Signals
         </div>
    </main>  
   
     <div id="map"></div>
    
    <script>
-
-      function initMap(signalcoord) {
+      
+      function initMap() {
         var bengaluru = {lat: 12.9427, lng: 77.5858};
-       // var signalloc = (lat: signalcoord.lat, lng: signalcoord.long)
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 12,
           center: bengaluru
         });
-        var marker = new google.maps.Marker({
-          position: bengaluru,
-          map: map
-        });
+        var marker = [];
+        var i=0;
+        <% for(i = 0; i < slen; i++ ){   %>
+            (function(){
+                <% console.log(slist[i].place) %>
+                marker[i] = new google.maps.Marker({
+                   position: {lat: <%=slist[i].location.lat %>, lng: <%=slist[i].location.long %>},
+                   map: map
+                });
+                i++;
+             }());
+       <% }  %>
+
       }
-    //  initMap(slist);
-      //for(let i=0;i <= len ; i++)
-        //  initMap(slist[i]);
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8VpZvaDz8AyqC_JV73XlAMEV48HTHAmA&callback=initMap">
