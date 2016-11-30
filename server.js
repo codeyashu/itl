@@ -11,8 +11,11 @@ const r = require('rethinkdbdash')({
 
 const app = module.exports = express()
 const server = app.listen(3000)
-const io = require('socket.io').listen(server)
 
+//database query
+const query = require('./app/query')
+
+const io = require('socket.io').listen(server)
 
 //--use ejs and express layouts
 app.set('view engine','ejs')
@@ -25,11 +28,6 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 //all formulas
 const formula = require('./app/formula')
-//database query
-const query = require('./app/query')
-
-//find four critical points 
-const fdistance = require('./app/fpoints')
 
 //routes
 var router = require('./app/routes')
@@ -37,18 +35,6 @@ app.use('/',router)
 
 //public folder
 app.use(express.static(__dirname + '/public'))
-
-//traffic signal list
-query.signal(function(err, data){
-      if(err) {
-         console.log("failed to retrieve ambulance list" + err)
-      } 
-      else {
-        console.log("traffic signal list query successful")
-        global.slist = data.slist;
-        global.slen = data.slen;
-      }
-})
 
 
 //get nearest traffic Signal
@@ -82,6 +68,7 @@ io.on('connection',function(socket){
 
     socket.on('createSignal',function(chosenSignal){
         socket.join('traffic signal')
+        console.log("a traffic signal joined")
         console.log(chosenSignal +' joined')
         console.log(socket.id)
         r.table('trafficSignal').get(chosenSignal.toString()).update({socketId: socket.id}).run(function(err,response){
@@ -89,7 +76,7 @@ io.on('connection',function(socket){
                console.log('error updating socket id')
             }
             else{
-                console.log('socket id of signal '+ chosenSignal+' updated')
+                console.log('Socket id of signal '+ chosenSignal+' updated')
             }
         })
     })
@@ -104,7 +91,8 @@ io.on('connection',function(socket){
     socket.on('location sent',function(location){
 
           var nearest = getnearest(location);
-            console.log(nearest.distance);
+            console.log(nearest.distance)
+            console.log(nearest.sid)
 
           
          })
@@ -112,24 +100,16 @@ io.on('connection',function(socket){
 })
 
 
-
 setTimeout(function(){
-console.log(global.slist[0].id)
-console.log(global.slen)},1500);
+//console.log(global.slist[0].id)
+
+console.log(query.slen)
+},200);
 
 
 
-
-/*
-setInterval(function(){ 
-io.emit('emergency',"ulalalalalala")
-},45000)
-setInterval(function(){ 
-io.emit('cleared',"lalala")
-},100000)
-
-*/
 
 server.listen(function(){
     console.log('Server started!')
 })
+

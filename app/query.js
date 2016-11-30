@@ -1,39 +1,29 @@
-var express = require('express');
+const express = require('express');
 
-var r = require('rethinkdbdash')({
+const r = require('rethinkdbdash')({
     host: 'localhost',
     port: '28015',
     db: 'itl'
 });
 
-module.exports = {
-  signal : function(next){
+(function trafficSignal(){
     r.table('trafficSignal').run()
     .then(function(response){
-       var list = {
-         slist: response,
-         slen: Object.keys(response).length
-       };
-       next(null, list);
+       module.exports.slist = response;
+       module.exports.slen = Object.keys(response).length;
     })
     .error(function(err){
        console.log(err);
-       next(err);
     })   
- },
+ }());
 
- ambulance : function(next){
+(function ambulance(){
     r.table('ambulance').run()
     .then(function(response){
-       var list = {
-         alist: response,
-         alen: Object.keys(response).length
-       };
-      next(null, list);
+       module.exports.alist = response;
+       module.exports.alen = Object.keys(response).length;
     })
     .error(function(err){
        console.log(err);
-       next(err);
    })   
-  }
-}
+}());

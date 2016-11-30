@@ -1,4 +1,5 @@
-var x = function abc(){
-    var i = x;
-    
-}
+var tes = require('./test1.js')
+
+var a = tes.ax();
+console.log(tes.ay);
+console.log(a);

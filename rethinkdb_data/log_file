@@ -269,3 +269,21 @@
 2016-11-29T11:47:19.575130354 42.102798s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: Starting a new Raft election for term 11.
 2016-11-29T11:47:19.609907860 42.137574s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: This server is Raft leader for term 11. Latest log index is 30.
 2016-11-29T11:47:47.634901003 70.162568s warn: Problem when checking for new versions of RethinkDB: HTTP request to update.rethinkdb.com failed.
+2016-11-30T11:01:22.188962828 0.068236s notice: Running rethinkdb 2.3.5~0xenial (GCC 5.3.1)...
+2016-11-30T11:01:22.198692308 0.077972s notice: Running on Linux 4.4.0-47-generic x86_64
+2016-11-30T11:01:22.198880320 0.078153s notice: Loading data from directory /home/yashas/itl/rethinkdb_data
+2016-11-30T11:01:22.244633637 0.123906s info: Automatically using cache size of 2306 MB
+2016-11-30T11:01:22.245617049 0.124889s notice: Listening for intracluster connections on port 29015
+2016-11-30T11:01:22.296465199 0.175737s notice: Listening for client driver connections on port 28015
+2016-11-30T11:01:22.296632422 0.175905s notice: Listening for administrative HTTP connections on port 8080
+2016-11-30T11:01:22.296648332 0.175920s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-30T11:01:22.296651507 0.175923s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-30T11:01:22.296655090 0.175927s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-11-30T11:01:22.296656902 0.175929s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2016-11-30T11:01:22.296659153 0.175931s notice: Server ready, "yashas_notebook_gqe" 2565a840-403a-4550-9179-3307b401f860
+2016-11-30T11:01:23.664534905 1.543808s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: Starting a new Raft election for term 12.
+2016-11-30T11:01:23.674308186 1.553582s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: This server is Raft leader for term 12. Latest log index is 33.
+2016-11-30T11:01:23.744676683 1.623950s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: Starting a new Raft election for term 12.
+2016-11-30T11:01:23.753370883 1.632644s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: This server is Raft leader for term 12. Latest log index is 33.
+2016-11-30T11:01:24.139486839 2.018760s info: Table 9ad4c696-52c3-4e09-944f-3368c8d2cd29: Starting a new Raft election for term 11.
+2016-11-30T11:01:24.154088057 2.033361s info: Table 9ad4c696-52c3-4e09-944f-3368c8d2cd29: This server is Raft leader for term 11. Latest log index is 29.
