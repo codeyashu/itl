@@ -62,6 +62,8 @@ function getnearest(location){
 
 io.on('connection',function(socket){
 
+    console.log("Client connected.");
+
     socket.on('disconnect',function(){
         console.log('user disconnected')
     })
@@ -88,12 +90,12 @@ io.on('connection',function(socket){
 
    
   
-    socket.on('location sent',function(location){
+    socket.on('location sent',function(loclat,loclong){
 
          // var nearest = getnearest(location)
          //  console.log(nearest.distance)
-         console.log("latitude: "+ location.lat)
-         console.log("longitude: "+ location.long)
+         console.log("latitude: "+ loclat)
+         console.log("longitude: "+ loclong)
          console.log("calculating distances to traffic signal")
          console.log("nearestsignal = " + 1001)
          console.log("side 2")
@@ -106,6 +108,10 @@ io.on('connection',function(socket){
              
 
 server.listen(function(){
-    console.log('Server started!')
+    console.log('Server started!');
 })
 
+
+//client emits the location
+//add the request to the queue
+//check for concurrency and syncronization
