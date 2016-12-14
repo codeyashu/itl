@@ -94,11 +94,11 @@ io.on('connection',function(socket){
          //  console.log(nearest.distance)
          console.log("latitude: "+ location.lat)
          console.log("longitude: "+ location.long)
-         console.log("calculating distances")
-            console.log("nearestsignal = " + 1001)
-            console.log("side 2")
+         console.log("calculating distances to traffic signal")
+         console.log("nearestsignal = " + 1001)
+         console.log("side 2")
            
-           io.emit('emergency',"1001");
+         io.emit('emergency',"1001");
             
       })
       
