@@ -37,6 +37,8 @@ app.use('/',router)
 app.use(express.static(__dirname + '/public'))
 
 
+//MY FUNCTIONS
+
 //sort array of objects
 var sort_by = function(field, reverse, primer){
     var key = function (x) {return primer ? primer(x[field]) : x[field]};
@@ -51,26 +53,21 @@ var sort_by = function(field, reverse, primer){
 function getnearest(loclat,loclong){
     var lat = loclat;
     var long = loclong;
-
     var testnear = new Array();
-    
     console.log("Sorting By Distance to Traffic Signals")
-           
     for(let i = 0; i < query.slen; i++){
         (function(){
             var justtest = new Object;
             var sdist = formula.distance(lat,long,query.slist[i].location.lat,query.slist[i].location.long);
-
             justtest.sdist = sdist;
             justtest.sid = query.slist[i].id;
             justtest.splace = query.slist[i].place;
             justtest.lat = query.slist[i].location.lat;
             justtest.long = query.slist[i].location.long;
-
+            //Push to Array
             testnear.push(justtest);      
         }());
     }
-
     testnear.sort(sort_by('sdist', true, parseFloat));
     return testnear;
 }
@@ -84,20 +81,19 @@ function checkside(loclat,loclong,ssid){
         sidearray[1] =  formula.distance(loclat,loclong,response.cpoint.lat2,response.cpoint.long2)
         sidearray[2] =  formula.distance(loclat,loclong,response.cpoint.lat3,response.cpoint.long3)
         sidearray[3] =  formula.distance(loclat,loclong,response.cpoint.lat4,response.cpoint.long4)
-        console.log(sidearray.indexOf(Math.min(...sidearray)))
         showgreen(sidearray.indexOf(Math.min(...sidearray)))
     })
     .error(function(err){
          console.log(err + "Error while determining side");
     }) 
-    // return Math.min(...sidearray);
 }
 
 
-///--socket.io--///
+//---socket.io---//
 
 var momu = -1;
 var domu = -1;
+var flag = 0;
 var locarray = new Array()
 var nearest = new Object()
 
@@ -135,33 +131,37 @@ io.on('connection',function(socket){
     })
     
    
-   //On Location Sent By App
+   //On Location Sent By App First Time
     socket.on('location sent',function(loclat,loclong){
-         
+         firstcoord(loclat,loclong)        
+    })
+
+    function firstcoord(loclat,loclong){
          console.log("latitude: "+ loclat)
          console.log("longitude: "+ loclong)
-
          console.log("Calculating distances to traffic signal")
 
          nearest = getnearest(loclat,loclong)
 
-         console.log("Traffic Signal Order is ")
+         console.log("Traffic Signal Order by distance is ")
          console.dir(nearest)
          domu++;
          console.log("Nearest signal " +nearest[domu].sid)
          console.log("Place " +nearest[domu].splace)
          console.log("Distance from Ambulance " +nearest[domu].sdist + " Km")
-    })
+    }
 
+   //On repeated Sending
     socket.on('location sending',function(loclat,loclong){
+        if(momu > 10){
+             return;
+         }
          console.log("Checking if Approaching "+nearest[domu].splace + " ---Updating Array");
          var testdist = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long) 
          console.log("distance: "+testdist);
          momu++;
-
-         if(momu<=10){
-        
-             (function(){
+         if(momu <= 10){
+           (function(){
                  locarray[momu] = testdist
                  if(momu === 10){
                      if((locarray[0]-locarray[10]) > 0){
@@ -175,7 +175,8 @@ io.on('connection',function(socket){
                          domu++;
                          if(domu === 4){
                              console.log("Restarting!")
-                             domu=0;
+                             domu=-1;
+                             firstcoord(loclat,loclong);
                          }
                          momu = -1;
                      }
@@ -192,8 +193,8 @@ io.on('connection',function(socket){
  // emit green signal
 function showgreen(sside){
        console.log("Signal Side "+ sside)
-       io.emit('emergency',"1001");
-   }
+       io.emit('emergency',"ssideeeeee");
+}
 
 
 function gaat(){
