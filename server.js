@@ -65,6 +65,8 @@ function getnearest(loclat,loclong){
             justtest.sdist = sdist;
             justtest.sid = query.slist[i].id;
             justtest.splace = query.slist[i].place;
+            justtest.lat = query.slist[i].location.lat;
+            justtest.long = query.slist[i].location.long;
 
             testnear.push(justtest);
           
@@ -107,6 +109,7 @@ function checkside(loclat,loclong,ssid){
 var momu = -1;
 var domu = -1;
 var locarray = new Array()
+var nearest = new Object()
 
 io.on('connection',function(socket){
 
@@ -150,7 +153,7 @@ io.on('connection',function(socket){
 
          console.log("Calculating distances to traffic signal")
 
-         var nearest = getnearest(loclat,loclong)
+         nearest = getnearest(loclat,loclong)
 
          console.log("Traffic Signal Order is ")
          console.dir(nearest)
@@ -162,12 +165,13 @@ io.on('connection',function(socket){
 
     socket.on('location sending',function(loclat,loclong){
          console.log("Checking if Approaching "+nearest[domu].splace + " ---Updating Array");
+         var testdist = formula.distance(loclat,loclong,nearest.lat,nearest.long) 
          momu++;
 
          if(momu<=10){
         
              (function(){
-                 locarray[momu] = nearest[domu].sdist
+                 locarray[momu] = testdist
                  if(momu === 10){
                      if((locarray[0]-locarray[10]) > 0){
                          console.log("\n.\n.Confirmed Approaching\n.\n.")
