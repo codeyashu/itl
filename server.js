@@ -116,7 +116,7 @@ io.on('connection',function(socket){
          console.log("longitude: "+ loclong)
 
          console.log("Calculating distances to traffic signal")
-         var nearest = getnearest(loclat,long)
+         var nearest = getnearest(loclat,loclong)
          momu++;
          console.log("Nearest signal " +nearest.sid)
          console.log("Location " +nearest.splace)
