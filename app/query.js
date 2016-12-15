@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require('express')
 
 const r = require('rethinkdbdash')({
     host: 'localhost',
@@ -13,6 +13,7 @@ const r = require('rethinkdbdash')({
        module.exports.slen = Object.keys(response).length;
        console.dir(response)
        console.log("trafic signal query successful")
+       console.log('.\n.\n.\n.')
     })
     .error(function(err){
        console.log(err);

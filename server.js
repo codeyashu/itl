@@ -43,7 +43,7 @@ function getnearest(loclat,loclong){
      var lat = loclat;
      var long = loclong;
      var ssid;
-     var ssloc;
+     var ssplace;
            
      for(let i = 0; i < query.slen; i++){
         (function(){
@@ -51,35 +51,36 @@ function getnearest(loclat,loclong){
             if(distance < min){
                min = distance;
                ssid = query.slist[i].id;
-               ssloc = query.slist[i].place;
+               ssplace = query.slist[i].place;
             }
         }());
      }
      console.log("Nearest signal " +ssid)
-     console.log("Location " +ssloc)
+     console.log("Location " +ssplace)
      console.log("Distance from Ambulance " +min + " Km")
      
      
      return {
          distance : min,
-         ssid : ssid
+         sid : ssid,
+         splace : ssplace
      }
 }
 
-///--socket.io--//
 
 
-
-
+///--socket.io--///
 
 io.on('connection',function(socket){
 
-    console.log("Client connected.");
-
+    console.log("Client Connected.");
+ 
+    //On disconnection
     socket.on('disconnect',function(){
-        console.log('user disconnected')
+        console.log('Client Disconnected')
     })
 
+    //On traffic Signal Join
     socket.on('createSignal',function(chosenSignal){
         socket.join('traffic signal')
         console.log("a traffic signal joined")
@@ -95,24 +96,44 @@ io.on('connection',function(socket){
         })
     })
 
+   //On Ambulance Join
     socket.on('createAmbulance',function(chosenAmbulance){
         socket.join('emergency ambulance')
         console.log('Ambulance '+chosenAmbulance+' in emergency')
+        console.log('Waiting For Location Data')
     })
 
-   
-  
-    socket.on('location sent',function(loclat,loclong){
 
-         // var nearest = getnearest(location)
-         // console.log(nearest.distance)
+
+    var momu = 0
+   
+   //On Location Sent By App
+    socket.on('location sent',function(loclat,loclong){
+         
+         
+         
          console.log("latitude: "+ loclat)
          console.log("longitude: "+ loclong)
 
-         getnearest(loclat,long);
-         console.log("calculating distances to traffic signal")
-         console.log("nearestsignal = " + 1001)
-         console.log("side 2")
+         console.log("Calculating distances to traffic signal")
+         var nearest = getnearest(loclat,long)
+         momu++;
+         console.log("Nearest signal " +nearest.sid)
+         console.log("Location " +nearest.splace)
+         console.log("Distance from Ambulance " +nearest.distance + " Km")
+         
+         console.log("Checking if Approaching "+nearest.splace + " Updating Array")
+
+         (function(){
+             var locarray = new Array()
+             locarray[momu] = nearest.distance
+             if(momu === 10){
+                 if((locarray[1]-locarray[10]) > 0){
+                     console.log("Confirmed Approaching")
+                 }
+             }
+
+         }())
            
          io.emit('emergency',"1001");
             
