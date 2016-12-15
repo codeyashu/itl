@@ -66,6 +66,9 @@ function getnearest(loclat,loclong){
 
 ///--socket.io--///
 
+var momu = 0
+var locarray = new Array()
+
 io.on('connection',function(socket){
 
     console.log("Client Connected.");
@@ -100,7 +103,7 @@ io.on('connection',function(socket){
 
 
 
-    var momu = 0
+    
    
    //On Location Sent By App
     socket.on('location sent',function(loclat,loclong){
@@ -117,10 +120,9 @@ io.on('connection',function(socket){
          console.log("Location " +nearest.splace)
          console.log("Distance from Ambulance " +nearest.distance + " Km")
          
-         console.log("Checking if Approaching "+nearest.splace + " Updating Array")
+         console.log("Checking if Approaching "+nearest.splace + " Updating Array");
 
          (function(){
-             var locarray = new Array()
              locarray[momu] = nearest.distance
              if(momu === 10){
                  if((locarray[1]-locarray[10]) > 0){
