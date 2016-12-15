@@ -94,11 +94,10 @@ function getnearest(loclat,loclong){
 
 function checkside(loclat,loclong,ssid){
     var sidearray = new Array;
-    var minside;
-    sidearray[0] =  formula.distance(lat,long,query.slist[ssid].cpoint.lat1,query.slist[ssid].cpoint.long1);
-    sidearray[1] =  formula.distance(lat,long,query.slist[ssid].cpoint.lat2,query.slist[ssid].cpoint.long2);
-    sidearray[2] =  formula.distance(lat,long,query.slist[ssid].cpoint.lat3,query.slist[ssid].cpoint.long3);
-    sidearray[3] =  formula.distance(lat,long,query.slist[ssid].cpoint.lat4,query.slist[ssid].cpoint.long4);
+    sidearray[0] =  formula.distance(loclat,loclong,query.slist[ssid].cpoint.lat1,query.slist[ssid].cpoint.long1);
+    sidearray[1] =  formula.distance(loclat,loclong,query.slist[ssid].cpoint.lat2,query.slist[ssid].cpoint.long2);
+    sidearray[2] =  formula.distance(loclat,loclong,query.slist[ssid].cpoint.lat3,query.slist[ssid].cpoint.long3);
+    sidearray[3] =  formula.distance(loclat,loclong,query.slist[ssid].cpoint.lat4,query.slist[ssid].cpoint.long4);
     return arr.indexOf(Math.max(...sidearray));
    // return Math.min(...sidearray);
 }
@@ -165,7 +164,8 @@ io.on('connection',function(socket){
 
     socket.on('location sending',function(loclat,loclong){
          console.log("Checking if Approaching "+nearest[domu].splace + " ---Updating Array");
-         var testdist = formula.distance(loclat,loclong,nearest.lat,nearest.long) 
+         var testdist = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long) 
+         console.log("distance: "+testdist);
          momu++;
 
          if(momu<=10){
@@ -174,7 +174,7 @@ io.on('connection',function(socket){
                  locarray[momu] = testdist
                  if(momu === 10){
                      if((locarray[0]-locarray[10]) > 0){
-                         console.log("\n.\n.Confirmed Approaching\n.\n.")
+                         console.log("\n.\n.\nConfirmed Approaching\n.\n.")
                          console.log("Checking Side")
                          var sside = checkside(loclat,loclong,nearest[domu].sid)
                          sside++;
