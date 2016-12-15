@@ -84,8 +84,8 @@ function checkside(loclat,loclong,ssid){
         sidearray[1] =  formula.distance(loclat,loclong,response.cpoint.lat2,response.cpoint.long2)
         sidearray[2] =  formula.distance(loclat,loclong,response.cpoint.lat3,response.cpoint.long3)
         sidearray[3] =  formula.distance(loclat,loclong,response.cpoint.lat4,response.cpoint.long4)
-        console.log(arr.indexOf(Math.min(...sidearray)))
-        showgreen(arr.indexOf(Math.min(...sidearray)))
+        console.log(sidearray.indexOf(Math.min(...sidearray)))
+        showgreen(sidearray.indexOf(Math.min(...sidearray)))
     })
     .error(function(err){
          console.log(err + "Error while determining side");
@@ -185,13 +185,15 @@ io.on('connection',function(socket){
     })
 
 
-      // emit green signal
-   function showgreen(sside){
+      
+      
+ })
+
+ // emit green signal
+function showgreen(sside){
        console.log("Signal Side "+ sside)
        io.emit('emergency',"1001");
    }
-      
- })
 
 
 function gaat(){
