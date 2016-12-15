@@ -38,10 +38,10 @@ app.use(express.static(__dirname + '/public'))
 
 
 //get nearest traffic Signal
-function getnearest(location){
+function getnearest(loclat,loclong){
      var min = 1000;
-     var lat = location.lat;
-     var long = location.long;
+     var lat = loclat;
+     var long = loclong;
            
      for(let i = 0; i < global.slen; i++){
         (function(){
@@ -52,6 +52,8 @@ function getnearest(location){
             }
         }());
      }
+     conole.log(min);
+     console.log(sid)
      return {
          distance : min,
          sid : sid
@@ -93,9 +95,11 @@ io.on('connection',function(socket){
     socket.on('location sent',function(loclat,loclong){
 
          // var nearest = getnearest(location)
-         //  console.log(nearest.distance)
+         // console.log(nearest.distance)
          console.log("latitude: "+ loclat)
          console.log("longitude: "+ loclong)
+
+         getnearest(loclat,long);
          console.log("calculating distances to traffic signal")
          console.log("nearestsignal = " + 1001)
          console.log("side 2")
