@@ -154,35 +154,39 @@ io.on('connection',function(socket){
 
          console.log("Traffic Signal Order is ")
          console.dir(nearest)
-         momu++;
          domu++;
          console.log("Nearest signal " +nearest[domu].sid)
          console.log("Place " +nearest[domu].splace)
          console.log("Distance from Ambulance " +nearest[domu].sdist + " Km")
-         
+    })
+
+    socket.on('location sending',function(loclat,loclong){
          console.log("Checking if Approaching "+nearest[domu].splace + " ---Updating Array");
+         momu++;
 
-         (function(){
-             locarray[momu] = nearest[domu].sdist
-             if(momu === 10){
-                 if((locarray[0]-locarray[10]) > 0){
-                     console.log("\n.\n.Confirmed Approaching\n.\n.")
-                     console.log("Checking Side")
-                     var sside = checkside(loclat,loclong,nearest[domu].sid)
-                     sside++;
-                     console.log("nearest[domu] Side is "+ sside)
-                     showgreen(sside);
+         if(momu<=10){
+        
+             (function(){
+                 locarray[momu] = nearest[domu].sdist
+                 if(momu === 10){
+                     if((locarray[0]-locarray[10]) > 0){
+                         console.log("\n.\n.Confirmed Approaching\n.\n.")
+                         console.log("Checking Side")
+                         var sside = checkside(loclat,loclong,nearest[domu].sid)
+                         sside++;
+                         console.log("nearest[domu] Side is "+ sside)
+                         showgreen(sside);
+                     }
+                     else{
+                         console.log("Moving away from signal "+ nearest[domu].splace)
+                         console.log("Checking Next Signal")
+                         domu++;
+                         momu = -1;
+                     }
                  }
-                 else{
-                     console.log("Moving away from signal "+ nearest[domu].splace)
-                     console.log("Checking Next Signal")
-                     domu++;
-                 }
-             }
-
-         }());  
-            
-      })
+             }());
+         }  
+    })
 
 
       // emit green signal
@@ -196,9 +200,9 @@ io.on('connection',function(socket){
 
 
 function gaat(){
- // var x = getnearest(12.9179065,77.5870897)
- // console.dir(x);
- // console.log(x[0].sdist)
+ var x = getnearest(12.9179065,77.5870897)
+  console.dir(x);
+  console.log(x[0].sdist)
 }
 setTimeout(gaat,3000);
       
