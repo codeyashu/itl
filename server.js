@@ -39,28 +39,38 @@ app.use(express.static(__dirname + '/public'))
 
 //get nearest traffic Signal
 function getnearest(loclat,loclong){
-     var min = 1000;
+     var min = 10000;
      var lat = loclat;
      var long = loclong;
+     var ssid;
+     var ssloc;
            
-     for(let i = 0; i < global.slen; i++){
+     for(let i = 0; i < query.slen; i++){
         (function(){
-            var distance = formula.distance(lat,long,global.slist[i].lat,global.slist[i].long);
+            var distance = formula.distance(lat,long,query.slist[i].location.lat,query.slist[i].location.long);
             if(distance < min){
                min = distance;
-               var sid = global.slist[i].id;
+               ssid = query.slist[i].id;
+               ssloc = query.slist[i].place;
             }
         }());
      }
-     conole.log(min);
-     console.log(sid)
+     console.log("Nearest signal " +ssid)
+     console.log("Location " +ssloc)
+     console.log("Distance from Ambulance " +min + " Km")
+     
+     
      return {
          distance : min,
-         sid : sid
+         ssid : ssid
      }
 }
 
 ///--socket.io--//
+
+
+
+
 
 io.on('connection',function(socket){
 
@@ -109,7 +119,20 @@ io.on('connection',function(socket){
       })
       
  })
-             
+
+
+
+
+function gaat(){
+  var x = getnearest(12.917049,77.636326)
+
+  console.log(x.distance)
+ // console.log(query.slen)
+ // console.log(query.slist[0].location.lat)
+  //console.log(query.slist)
+}
+setTimeout(gaat,3000);
+      
 
 server.listen(function(){
     console.log('Server started!');
