@@ -49,7 +49,6 @@ var sort_by = function(field, reverse, primer){
 
 //get distance to traffic Signal
 function getnearest(loclat,loclong){
-    // var min = 10000;
     var lat = loclat;
     var long = loclong;
 
@@ -68,38 +67,29 @@ function getnearest(loclat,loclong){
             justtest.lat = query.slist[i].location.lat;
             justtest.long = query.slist[i].location.long;
 
-            testnear.push(justtest);
-          
-            /*  if(distance < min){
-                min = distance;
-                ssid = query.slist[i].id;
-                ssplace = query.slist[i].place;
-                }
-            */ 
+            testnear.push(justtest);      
         }());
     }
 
     testnear.sort(sort_by('sdist', true, parseFloat));
-
-        /* return {
-           distance : min,
-           sid : ssid,
-           splace : ssplace
-          }
-        */
-
     return testnear;
 }
 
 
 function checkside(loclat,loclong,ssid){
     var sidearray = new Array;
-    sidearray[0] =  formula.distance(loclat,loclong,query.slist[ssid].cpoint.lat1,query.slist[ssid].cpoint.long1);
-    sidearray[1] =  formula.distance(loclat,loclong,query.slist[ssid].cpoint.lat2,query.slist[ssid].cpoint.long2);
-    sidearray[2] =  formula.distance(loclat,loclong,query.slist[ssid].cpoint.lat3,query.slist[ssid].cpoint.long3);
-    sidearray[3] =  formula.distance(loclat,loclong,query.slist[ssid].cpoint.lat4,query.slist[ssid].cpoint.long4);
-    return arr.indexOf(Math.max(...sidearray));
-   // return Math.min(...sidearray);
+    r.table('trafficSignal').get(ssid).pluck('cpoint').run()
+    .then(function(response){
+        sidearray[0] =  formula.distance(loclat,loclong,response.cpoint.lat1,response.cpoint.long1);
+        sidearray[1] =  formula.distance(loclat,loclong,response.cpoint.lat2,response.cpoint.long2);
+        sidearray[2] =  formula.distance(loclat,loclong,response.cpoint.lat3,response.cpoint.long3);
+        sidearray[3] =  formula.distance(loclat,loclong,response.cpoint.lat4,response.cpoint.long4);
+        showgreen(arr.indexOf(Math.min(...sidearray)))
+    })
+    .error(function(err){
+         console.log(err + "Error while determining side");
+    }) 
+    // return Math.min(...sidearray);
 }
 
 
@@ -176,15 +166,16 @@ io.on('connection',function(socket){
                      if((locarray[0]-locarray[10]) > 0){
                          console.log("\n.\n.\nConfirmed Approaching\n.\n.")
                          console.log("Checking Side")
-                         var sside = checkside(loclat,loclong,nearest[domu].sid)
-                         sside++;
-                         console.log("nearest[domu] Side is "+ sside)
-                         showgreen(sside);
+                         checkside(loclat,loclong,nearest[domu].sid)
                      }
                      else{
                          console.log("Moving away from signal "+ nearest[domu].splace)
                          console.log("Checking Next Signal")
                          domu++;
+                         if(domu === 4){
+                             console.log("Restarting!")
+                             domu=0;
+                         }
                          momu = -1;
                      }
                  }
@@ -195,18 +186,17 @@ io.on('connection',function(socket){
 
       // emit green signal
    function showgreen(sside){
+       console.log("Signal Side "+ sside)
        io.emit('emergency',"1001");
    }
       
  })
 
 
-
-
 function gaat(){
  var x = getnearest(12.9179065,77.5870897)
   console.dir(x);
-  console.log(x[0].sdist)
+  console.log(x[0].sdist)      
 }
 setTimeout(gaat,3000);
       
