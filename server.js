@@ -80,10 +80,11 @@ function checkside(loclat,loclong,ssid){
     var sidearray = new Array;
     r.table('trafficSignal').get(ssid).pluck('cpoint').run()
     .then(function(response){
-        sidearray[0] =  formula.distance(loclat,loclong,response.cpoint.lat1,response.cpoint.long1);
-        sidearray[1] =  formula.distance(loclat,loclong,response.cpoint.lat2,response.cpoint.long2);
-        sidearray[2] =  formula.distance(loclat,loclong,response.cpoint.lat3,response.cpoint.long3);
-        sidearray[3] =  formula.distance(loclat,loclong,response.cpoint.lat4,response.cpoint.long4);
+        sidearray[0] =  formula.distance(loclat,loclong,response.cpoint.lat1,response.cpoint.long1)
+        sidearray[1] =  formula.distance(loclat,loclong,response.cpoint.lat2,response.cpoint.long2)
+        sidearray[2] =  formula.distance(loclat,loclong,response.cpoint.lat3,response.cpoint.long3)
+        sidearray[3] =  formula.distance(loclat,loclong,response.cpoint.lat4,response.cpoint.long4)
+        console.log(arr.indexOf(Math.min(...sidearray)))
         showgreen(arr.indexOf(Math.min(...sidearray)))
     })
     .error(function(err){
