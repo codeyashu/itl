@@ -55,11 +55,6 @@ function getnearest(loclat,loclong){
             }
         }());
      }
-     console.log("Nearest signal " +ssid)
-     console.log("Location " +ssplace)
-     console.log("Distance from Ambulance " +min + " Km")
-     
-     
      return {
          distance : min,
          sid : ssid,
@@ -133,7 +128,7 @@ io.on('connection',function(socket){
                  }
              }
 
-         }())
+         }());
            
          io.emit('emergency',"1001");
             
