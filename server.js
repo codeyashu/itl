@@ -39,49 +39,52 @@ app.use(express.static(__dirname + '/public'))
 
 //sort array of objects
 var sort_by = function(field, reverse, primer){
-   var key = function (x) {return primer ? primer(x[field]) : x[field]};
+    var key = function (x) {return primer ? primer(x[field]) : x[field]};
 
-   return function (a,b) {
-	  var A = key(a), B = key(b);
-	  return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1,1][+!!reverse];                  
-   }
+    return function (a,b) {
+	    var A = key(a), B = key(b);
+	    return ( (A < B) ? -1 : ((A > B) ? 1 : 0) ) * [-1,1][+!!reverse];                  
+    }
 }
 
 //get distance to traffic Signal
 function getnearest(loclat,loclong){
     // var min = 10000;
-     var lat = loclat;
-     var long = loclong;
+    var lat = loclat;
+    var long = loclong;
 
-     var testnear = new Object();
+    var testnear = new Array();
+    
+    console.log("Sorting By Distance to Traffic Signals")
            
-     for(let i = 0; i < query.slen; i++){
+    for(let i = 0; i < query.slen; i++){
         (function(){
+            var justtest = new Object;
             var sdist = formula.distance(lat,long,query.slist[i].location.lat,query.slist[i].location.long);
 
-            testnear[i].sdist = sdist;
-            testnear[i].sid = query.slist[i].id;
-            testnear[i].splace = query.slist[i].place;
+            justtest.sdist = sdist;
+            justtest.sid = query.slist[i].id;
+            justtest.splace = query.slist[i].place;
+
+            testnear.push(justtest);
           
-          /*  if(distance < min){
-               min = distance;
-               ssid = query.slist[i].id;
-               ssplace = query.slist[i].place;
-            }
-        */ 
+            /*  if(distance < min){
+                min = distance;
+                ssid = query.slist[i].id;
+                ssplace = query.slist[i].place;
+                }
+            */ 
         }());
-     }
+    }
 
-     testnear.sort(sort_by('sdist', true, parseFloat));
+    testnear.sort(sort_by('sdist', true, parseFloat));
 
-/*
-     return {
-         distance : min,
-         sid : ssid,
-         splace : ssplace
-     }
-
-     */
+        /* return {
+           distance : min,
+           sid : ssid,
+           splace : ssplace
+          }
+        */
 
     return testnear;
 }
@@ -147,31 +150,31 @@ io.on('connection',function(socket){
 
          console.log("Calculating distances to traffic signal")
 
-         var testnear = getnearest(loclat,loclong)
+         var nearest = getnearest(loclat,loclong)
 
          console.log("Traffic Signal Order is ")
-         console.dir(testnear)
+         console.dir(nearest)
          momu++;
          domu++;
-         console.log("Nearest signal " +testnear[domu].sid)
-         console.log("Place " +testnear[domu].splace)
-         console.log("Distance from Ambulance " +testnear[domu].sdist + " Km")
+         console.log("Nearest signal " +nearest[domu].sid)
+         console.log("Place " +nearest[domu].splace)
+         console.log("Distance from Ambulance " +nearest[domu].sdist + " Km")
          
-         console.log("Checking if Approaching "+testnear[domu].splace + " ---Updating Array");
+         console.log("Checking if Approaching "+nearest[domu].splace + " ---Updating Array");
 
          (function(){
-             locarray[momu] = testnear[domu].sdist
+             locarray[momu] = nearest[domu].sdist
              if(momu === 10){
                  if((locarray[0]-locarray[10]) > 0){
                      console.log("\n.\n.Confirmed Approaching\n.\n.")
                      console.log("Checking Side")
-                     var sside = checkside(loclat,loclong,testnear[domu].sid)
+                     var sside = checkside(loclat,loclong,nearest[domu].sid)
                      sside++;
-                     console.log("testnear[domu] Side is "+ sside)
+                     console.log("nearest[domu] Side is "+ sside)
                      showgreen(sside);
                  }
                  else{
-                     console.log("Moving away from signal "+ testnear[domu].splace)
+                     console.log("Moving away from signal "+ nearest[domu].splace)
                      console.log("Checking Next Signal")
                      domu++;
                  }
@@ -193,8 +196,9 @@ io.on('connection',function(socket){
 
 
 function gaat(){
-  var x = getnearest(12.917049,77.636326)
-  console.dir(x);
+ // var x = getnearest(12.9179065,77.5870897)
+ // console.dir(x);
+ // console.log(x[0].sdist)
 }
 setTimeout(gaat,3000);
       
