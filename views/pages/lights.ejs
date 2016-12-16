@@ -67,11 +67,7 @@
 
       socket.emit('createSignal',<%= data.id %>);
      
-      socket.on('emergency', function(msg){
-       console.log("message   "+msg);
-      });
-    
-            
+        function initial(){    
             var r1 = $("#s1r");
             var r2 = $("#s2r");
             var r3 = $("#s3r");
@@ -91,6 +87,8 @@
             r2.css("background-color", "red");
             r3.css("background-color", "red");
             r4.css("background-color", "red");
+        }
+
 
       function startlights(){
          var timeouts = [
@@ -138,28 +136,32 @@
 
           var repeatLight = setTimeout(startlights,20000);   
 
-          socket.on('emergency', function(msg){
+          socket.on('emergency', function(sside){
                for (var i = 0; i < timeouts.length; ++i)
                  clearTimeout(timeouts[i]);
                clearTimeout(repeatLight);
-               //console.log("mayhem  "+msg);
-               console.log("green granted!")
+               
+            console.log("Emergency Acknowledged)
+            initial()
+            console.log("Granting Green to Side "+sside);
+            rside = "r"+Number(sside);
+            gside = "g"+Number(sside);
 
-            r1.css("background-color", "red");
-            r2.css("background-color", "black");
-            r3.css("background-color", "red");
-            r4.css("background-color", "red");
-            g2.css("background-color", "green");
+
+            rside.css("background-color", "black");
+            gside.css("background-color", "green");
 
             })
        }
 
        
        socket.on('cleared', function(msg){
-               console.log("saved!!");
+               console.log("Life Saved!!");
                startlights();
-            });
+        });
 
+
+       initial();
        startlights();
 
     </script>

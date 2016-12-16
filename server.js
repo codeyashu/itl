@@ -81,7 +81,7 @@ function checkside(loclat,loclong,ssid){
         sidearray[1] =  formula.distance(loclat,loclong,response.cpoint.lat2,response.cpoint.long2)
         sidearray[2] =  formula.distance(loclat,loclong,response.cpoint.lat3,response.cpoint.long3)
         sidearray[3] =  formula.distance(loclat,loclong,response.cpoint.lat4,response.cpoint.long4)
-        showgreen(sidearray.indexOf(Math.min(...sidearray)))
+        showgreen(ssid,sidearray.indexOf(Math.min(...sidearray)))
     })
     .error(function(err){
          console.log(err + "Error while determining side");
@@ -154,46 +154,51 @@ io.on('connection',function(socket){
    //On repeated Sending
     socket.on('location sending',function(loclat,loclong){
         if(momu > 10){
-             return;
+            console.log(".")
+            return;
          }
          console.log("Checking if Approaching "+nearest[domu].splace + " ---Updating Array");
          var testdist = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long) 
          console.log("distance: "+testdist);
          momu++;
-         if(momu <= 10){
-           (function(){
-                 locarray[momu] = testdist
-                 if(momu === 10){
-                     if((locarray[0]-locarray[10]) > 0){
-                         console.log("\n.\n.\nConfirmed Approaching\n.\n.")
-                         console.log("Checking Side")
-                         checkside(loclat,loclong,nearest[domu].sid)
-                     }
-                     else{
-                         console.log("Moving away from signal "+ nearest[domu].splace)
-                         console.log("Checking Next Signal")
-                         domu++;
-                         if(domu === 4){
-                             console.log("Restarting!")
-                             domu=-1;
-                             firstcoord(loclat,loclong);
-                         }
-                         momu = -1;
-                     }
+         (function(){
+             locarray[momu] = testdist
+             if(momu === 10){
+                 if((locarray[0]-locarray[10]) > 0){
+                     console.log(".\n.\nConfirmed Approaching\n.\n.")
+                     console.log("Checking Side")
+                     checkside(loclat,loclong,nearest[domu].sid)
                  }
-             }());
-         }  
-    })
-
-
-      
-      
+                 else{
+                     console.log("Moving away from signal "+ nearest[domu].splace)
+                     console.log("Checking Next Signal")
+                     domu++;
+                     if(domu === query.slen){
+                         console.log("Restarting!")
+                         domu=-1;
+                         firstcoord(loclat,loclong);
+                     }
+                     momu = -1;
+                 }
+             }
+         }());
+           
+    })  
  })
 
  // emit green signal
-function showgreen(sside){
-       console.log("Signal Side "+ sside)
-       io.emit('emergency',"ssideeeeee");
+function showgreen(sid,sside){
+       var aside = sside+1;
+       console.log("Signal Side "+ aside)
+       console.log("Requesting to grant green")
+       r.table('trafficSignal').get(sid).pluck('socketId').run()
+       .then(function(response){
+           io.to(response.socketId).emit('emergency ',aside)
+           console.log("green granted")
+       })
+       .error(function(err){
+           console.log("Error while retrieving socket ID")
+       })
 }
 
 
