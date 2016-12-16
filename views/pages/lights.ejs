@@ -67,7 +67,6 @@
 
       socket.emit('createSignal',<%= data.id %>);
      
-        function initial(){    
             var r1 = $("#s1r");
             var r2 = $("#s2r");
             var r3 = $("#s3r");
@@ -83,10 +82,20 @@
             var g3 = $("#s3g");
             var g4 = $("#s4g");
 
+
+       function initial(){ 
             r1.css("background-color", "red");
             r2.css("background-color", "red");
             r3.css("background-color", "red");
             r4.css("background-color", "red");
+            y1.css("background-color", "black");
+            y2.css("background-color", "black");
+            y3.css("background-color", "black");
+            y4.css("background-color", "black");
+            g1.css("background-color", "black");
+            g2.css("background-color", "black");
+            g3.css("background-color", "black");
+            g4.css("background-color", "black");
         }
 
 
@@ -141,7 +150,7 @@
                  clearTimeout(timeouts[i]);
                clearTimeout(repeatLight);
                
-            console.log("Emergency Acknowledged)
+            console.log("Emergency Acknowledged")
             initial()
             console.log("Granting Green to Side "+sside);
             rside = "r"+Number(sside);
