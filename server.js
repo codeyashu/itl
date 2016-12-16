@@ -182,24 +182,26 @@ io.on('connection',function(socket){
                  }
              }
          }());
-           
-    })  
+      })
+
+      // emit green signal
+       global.showgreen = function(sid,sside){
+           var aside = sside+1;
+           console.log("Signal Side "+ aside)
+           console.log("Requesting to grant green")
+           r.table('trafficSignal').get(sid).pluck('socketId').run()
+           .then(function(response){
+               console.log(response.socketId)
+               io.to(response.socketId).emit('emergency ',aside)
+               console.log("green granted")
+            })
+            .error(function(err){
+               console.log("Error while retrieving socket ID")
+            })
+        }  
  })
 
- // emit green signal
-function showgreen(sid,sside){
-       var aside = sside+1;
-       console.log("Signal Side "+ aside)
-       console.log("Requesting to grant green")
-       r.table('trafficSignal').get(sid).pluck('socketId').run()
-       .then(function(response){
-           io.to(response.socketId).emit('emergency ',aside)
-           console.log("green granted")
-       })
-       .error(function(err){
-           console.log("Error while retrieving socket ID")
-       })
-}
+ 
 
 
 function gaat(){
@@ -213,8 +215,3 @@ setTimeout(gaat,3000);
 server.listen(function(){
     console.log('Server started!');
 })
-
-
-//client emits the location
-//add the request to the queue
-//check for concurrency and syncronization
