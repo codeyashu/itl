@@ -155,7 +155,7 @@ io.on('connection',function(socket){
             firstcoord(loclat,loclong)
             return;
         }
-        
+
         if(momu > 10){
             console.log(".")
             var testdist2 = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long)
@@ -167,6 +167,7 @@ io.on('connection',function(socket){
                     domu=-1;
                 }
             } 
+            return;
         }
 
         console.log("Checking if Approaching "+nearest[domu].splace + " ---Updating Array");
