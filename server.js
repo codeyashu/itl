@@ -95,6 +95,7 @@ var momu = 0;
 var domu = -1;
 var flag = 0;
 var locarray = new Array()
+var locarray2 = new Array()
 var nearest = new Object()
 
 io.on('connection',function(socket){
@@ -149,14 +150,25 @@ io.on('connection',function(socket){
    //On repeated Sending     //On Location Sent By App First Time
     socket.on('location sent',function(loclat,loclong){
         momu++;
+
         if(momu===1){
             firstcoord(loclat,loclong)
             return;
         }
+        
         if(momu > 10){
             console.log(".")
-            return;
+            var testdist2 = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long)
+            locarray2[flag] = testdist2;
+            if(flag>=3){
+                if(locarray2[flag]-locarray2[flag-3]>0){
+                    console.log("Signal Passed")
+                    momu=0;
+                    domu=-1;
+                }
+            } 
         }
+
         console.log("Checking if Approaching "+nearest[domu].splace + " ---Updating Array");
         var testdist = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long) 
         console.log("distance: "+testdist);
@@ -207,7 +219,8 @@ io.on('connection',function(socket){
 function gaat(){
  var x = getnearest(12.9179065,77.5870897)
   console.dir(x);
-  console.log(x[0].sdist)      
+  console.log(x[0].sdist)    
+  console.log(".\n.\n.\n.")  
 }
 setTimeout(gaat,3000);
       
