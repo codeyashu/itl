@@ -97,6 +97,7 @@ var tomu = -1;
 var locarray = new Array()
 var locarray2 = new Array()
 var nearest = new Object()
+var reqside;
 
 io.on('connection',function(socket){
 
@@ -168,6 +169,7 @@ io.on('connection',function(socket){
                     momu = 0;
                     domu = -1;
                     tomu = 0;
+                    emergencyover();
                 }
             } 
             return;
@@ -207,15 +209,22 @@ io.on('connection',function(socket){
            console.log("Requesting to grant green")
            r.table('trafficSignal').get(sid).pluck('socketId').run()
            .then(function(response){
-               console.log(response.socketId)
+               reqside = response.socketId;
+               console.log(reqside)
              //  io.to(response.socketId).emit('emergency ',aside)
-               socket.broadcast.to(response.socketId).emit('emergency', aside)
+               socket.broadcast.to(reqside).emit('emergency', aside)
                console.log("green granted")
             })
             .error(function(err){
                console.log("Error while retrieving socket ID")
             })
-        }  
+        } 
+
+        function emergencyover(){
+               socket.broadcast.to(reqside).emit('emergency', aside);
+               return;
+
+        } 
  })
 
  

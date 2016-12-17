@@ -153,13 +153,26 @@
                console.log("Emergency Acknowledged")
                initial()
                console.log("Granting Green to Side "+sside);
-               rside = "r"+Number(sside); console.log(rside);
-               gside = "g"+Number(sside); console.log(gside);
-
-
-               rside.css("background-color", "black");
-               gside.css("background-color", "green");
-
+               if(sside === 1){
+                   r1.css("background-color","black")
+                   g1.css("background-color","green")
+               }
+               else if(sside === 2){
+                   r2.css("background-color","black")
+                   g2.css("background-color","green")
+               }
+               else if(sside === 3){
+                   r3.css("background-color","black")
+                   g3.css("background-color","green")
+               }
+               else if(sside === 4){
+                   r4.css("background-color","black")
+                   g4.css("background-color","green")
+               }
+               else{
+                   console.log("invalid side")
+                   return;
+               }
             })
        }
 
