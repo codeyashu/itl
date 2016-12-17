@@ -160,11 +160,13 @@ io.on('connection',function(socket){
             console.log(".")
             var testdist2 = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long)
             locarray2[flag] = testdist2;
+            flag++;
             if(flag>=3){
                 if(locarray2[flag]-locarray2[flag-3]>0){
                     console.log("Signal Passed")
-                    momu=0;
-                    domu=-1;
+                    momu = 0;
+                    domu = -1;
+                    flag = 0;
                 }
             } 
             return;
