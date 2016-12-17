@@ -91,7 +91,7 @@ function checkside(loclat,loclong,ssid){
 
 //---socket.io---//
 
-var momu = -1;
+var momu = 0;
 var domu = -1;
 var flag = 0;
 var locarray = new Array()
@@ -130,11 +130,6 @@ io.on('connection',function(socket){
         console.log('Waiting For Location Data')
     })
     
-   
-   //On Location Sent By App First Time
-    socket.on('location sent',function(loclat,loclong){
-         firstcoord(loclat,loclong)        
-    })
 
     function firstcoord(loclat,loclong){
          console.log("latitude: "+ loclat)
@@ -151,20 +146,24 @@ io.on('connection',function(socket){
          console.log("Distance from Ambulance " +nearest[domu].sdist + " Km")
     }
 
-   //On repeated Sending
-    socket.on('location sending',function(loclat,loclong){
+   //On repeated Sending     //On Location Sent By App First Time
+    socket.on('location sent',function(loclat,loclong){
+        momu++;
+        if(momu===1){
+            firstcoord(loclat,loclong)
+            return;
+        }
         if(momu > 10){
             console.log(".")
             return;
-         }
-         console.log("Checking if Approaching "+nearest[domu].splace + " ---Updating Array");
-         var testdist = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long) 
-         console.log("distance: "+testdist);
-         momu++;
-         (function(){
+        }
+        console.log("Checking if Approaching "+nearest[domu].splace + " ---Updating Array");
+        var testdist = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long) 
+        console.log("distance: "+testdist);
+        (function(){
              locarray[momu] = testdist
              if(momu === 10){
-                 if((locarray[0]-locarray[10]) > 0){
+                 if((locarray[2]-locarray[10]) > 0){
                      console.log(".\n.\nConfirmed Approaching\n.\n.")
                      console.log("Checking Side")
                      checkside(loclat,loclong,nearest[domu].sid)
@@ -176,9 +175,10 @@ io.on('connection',function(socket){
                      if(domu === query.slen){
                          console.log("Restarting!")
                          domu=-1;
-                         firstcoord(loclat,loclong);
+                         momu=0;
+                         return;
                      }
-                     momu = -1;
+                     momu = 1;
                  }
              }
          }());
