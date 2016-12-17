@@ -150,15 +150,15 @@
                  clearTimeout(timeouts[i]);
                clearTimeout(repeatLight);
                
-            console.log("Emergency Acknowledged")
-            initial()
-            console.log("Granting Green to Side "+sside);
-            rside = "r"+Number(sside);
-            gside = "g"+Number(sside);
+               console.log("Emergency Acknowledged")
+               initial()
+               console.log("Granting Green to Side "+sside);
+               rside = "r"+Number(sside); console.log(rside);
+               gside = "g"+Number(sside); console.log(gside);
 
 
-            rside.css("background-color", "black");
-            gside.css("background-color", "green");
+               rside.css("background-color", "black");
+               gside.css("background-color", "green");
 
             })
        }

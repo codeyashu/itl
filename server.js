@@ -161,10 +161,7 @@ io.on('connection',function(socket){
             tomu++;
             var testdist2 = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long)
             locarray2[tomu] = testdist2;
-            console.log(tomu)
             if(tomu>=3){
-              console.log(locarray2[tomu])
-              console.log(locarray2[tomu-3])
                 console.log(locarray2[tomu]-locarray2[tomu-3])
                 if((locarray2[tomu]-locarray2[tomu-3]) > 0){
                     console.log("Signal Passed")
@@ -211,7 +208,8 @@ io.on('connection',function(socket){
            r.table('trafficSignal').get(sid).pluck('socketId').run()
            .then(function(response){
                console.log(response.socketId)
-               io.to(response.socketId).emit('emergency ',aside)
+             //  io.to(response.socketId).emit('emergency ',aside)
+               socket.broadcast.to(response.socketId).emit('emergency', aside)
                console.log("green granted")
             })
             .error(function(err){
@@ -222,7 +220,7 @@ io.on('connection',function(socket){
 
  
 
-
+/*
 function gaat(){
  var x = getnearest(12.9179065,77.5870897)
   console.dir(x);
@@ -230,7 +228,7 @@ function gaat(){
   console.log(".\n.\n.\n.")  
 }
 setTimeout(gaat,3000);
-      
+*/   
 
 server.listen(function(){
     console.log('Server started!');
