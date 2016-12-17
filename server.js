@@ -161,14 +161,16 @@ io.on('connection',function(socket){
             var testdist2 = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long)
             locarray2[flag] = testdist2;
             console.log(flag)
-            console.log(locarray2)
             flag++;
             if(flag>=3){
                 console.log(">3")
-                var galf = flag-3;
+               // var galf = flag-3;
                 console.log("f"+flag)
-                console.log("g"+galf)
-                if((locarray2[flag]-locarray2[galf])>0){
+              //  console.log("g"+galf)
+              console.log(locarray2[flag])
+              console.log(locarray2[flag-3])
+                console.log(locarray2[flag]-locarray2[flag-3])
+                if((locarray2[flag]-locarray2[flag-3]) > 0){
                     console.log("Signal Passed")
                     momu = 0;
                     domu = -1;
