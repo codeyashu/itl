@@ -93,7 +93,7 @@ function checkside(loclat,loclong,ssid){
 
 var momu = 0;
 var domu = -1;
-var flag = 0;
+var tomu = -1;
 var locarray = new Array()
 var locarray2 = new Array()
 var nearest = new Object()
@@ -158,23 +158,19 @@ io.on('connection',function(socket){
 
         if(momu > 10){
             console.log(".")
+            tomu++;
             var testdist2 = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long)
-            locarray2[flag] = testdist2;
-            console.log(flag)
-            flag++;
-            if(flag>=3){
-                console.log(">3")
-               // var galf = flag-3;
-                console.log("f"+flag)
-              //  console.log("g"+galf)
-              console.log(locarray2[flag])
-              console.log(locarray2[flag-3])
-                console.log(locarray2[flag]-locarray2[flag-3])
-                if((locarray2[flag]-locarray2[flag-3]) > 0){
+            locarray2[tomu] = testdist2;
+            console.log(tomu)
+            if(tomu>=3){
+              console.log(locarray2[tomu])
+              console.log(locarray2[tomu-3])
+                console.log(locarray2[tomu]-locarray2[tomu-3])
+                if((locarray2[tomu]-locarray2[tomu-3]) > 0){
                     console.log("Signal Passed")
                     momu = 0;
                     domu = -1;
-                    flag = 0;
+                    tomu = 0;
                 }
             } 
             return;
