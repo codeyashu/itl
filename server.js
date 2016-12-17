@@ -221,7 +221,7 @@ io.on('connection',function(socket){
         } 
 
         function emergencyover(){
-               socket.broadcast.to(reqside).emit('emergency', aside);
+               socket.broadcast.to(reqside).emit('cleared', "restart");
                return;
 
         } 
