@@ -168,7 +168,7 @@ io.on('connection',function(socket){
                 var galf = flag-3;
                 console.log("f"+flag)
                 console.log("g"+galf)
-                if((locarray2[flag]-locarray2[glaf])>0){
+                if((locarray2[flag]-locarray2[galf])>0){
                     console.log("Signal Passed")
                     momu = 0;
                     domu = -1;
