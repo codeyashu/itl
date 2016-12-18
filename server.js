@@ -168,9 +168,8 @@ io.on('connection',function(socket){
                     console.log("Signal Passed")
                     momu = 0;
                     domu = -1;
-                    tomu = 0;
+                    tomu = -1;
                     emergencyover();
-                    firstcoord(loclat,loclong);
                 }
             } 
             return;
