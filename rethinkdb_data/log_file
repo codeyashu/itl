@@ -357,3 +357,21 @@
 2016-12-17T13:08:50.023349252 2.621605s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: This server is Raft leader for term 15. Latest log index is 42.
 2016-12-17T13:08:50.199231084 2.797487s info: Table 9ad4c696-52c3-4e09-944f-3368c8d2cd29: Starting a new Raft election for term 14.
 2016-12-17T13:08:50.205650970 2.803906s info: Table 9ad4c696-52c3-4e09-944f-3368c8d2cd29: This server is Raft leader for term 14. Latest log index is 38.
+2016-12-18T10:44:43.462367314 0.244230s notice: Running rethinkdb 2.3.5~0xenial (GCC 5.3.1)...
+2016-12-18T10:44:43.469805266 0.251674s notice: Running on Linux 4.4.0-53-generic x86_64
+2016-12-18T10:44:43.469978626 0.251841s notice: Loading data from directory /home/yashas/itl/rethinkdb_data
+2016-12-18T10:44:43.506988873 0.288851s info: Automatically using cache size of 2399 MB
+2016-12-18T10:44:43.507915869 0.289778s notice: Listening for intracluster connections on port 29015
+2016-12-18T10:44:43.551552858 0.333415s notice: Listening for client driver connections on port 28015
+2016-12-18T10:44:43.552108166 0.333970s notice: Listening for administrative HTTP connections on port 8080
+2016-12-18T10:44:43.552115108 0.333977s notice: Listening on cluster addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-12-18T10:44:43.552143859 0.334006s notice: Listening on driver addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-12-18T10:44:43.552150901 0.334013s notice: Listening on http addresses: 127.0.0.1, 127.0.1.1, ::1
+2016-12-18T10:44:43.552158224 0.334020s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2016-12-18T10:44:43.552164721 0.334026s notice: Server ready, "yashas_notebook_gqe" 2565a840-403a-4550-9179-3307b401f860
+2016-12-18T10:44:44.541368639 1.323232s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: Starting a new Raft election for term 16.
+2016-12-18T10:44:44.547876196 1.329739s info: Table 41f050aa-577f-407f-9cdf-7228a7d79c02: This server is Raft leader for term 16. Latest log index is 45.
+2016-12-18T10:44:44.631996826 1.413860s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: Starting a new Raft election for term 16.
+2016-12-18T10:44:44.638689262 1.420552s info: Table b1535153-95dd-416a-88be-4d73da00b2bf: This server is Raft leader for term 16. Latest log index is 45.
+2016-12-18T10:44:44.967746999 1.749609s info: Table 9ad4c696-52c3-4e09-944f-3368c8d2cd29: Starting a new Raft election for term 15.
+2016-12-18T10:44:44.973247546 1.755110s info: Table 9ad4c696-52c3-4e09-944f-3368c8d2cd29: This server is Raft leader for term 15. Latest log index is 41.

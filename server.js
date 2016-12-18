@@ -163,13 +163,14 @@ io.on('connection',function(socket){
             var testdist2 = formula.distance(loclat,loclong,nearest[domu].lat,nearest[domu].long)
             locarray2[tomu] = testdist2;
             if(tomu>=3){
-                console.log(locarray2[tomu]-locarray2[tomu-3])
+             //   console.log(locarray2[tomu]-locarray2[tomu-3])
                 if((locarray2[tomu]-locarray2[tomu-3]) > 0){
                     console.log("Signal Passed")
                     momu = 0;
                     domu = -1;
                     tomu = 0;
                     emergencyover();
+                    firstcoord(loclat,loclong);
                 }
             } 
             return;
