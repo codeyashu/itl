@@ -116,7 +116,7 @@ io.on('connection',function(socket){
         console.log(chosenSignal +' joined')
         console.log(socket.id)
         r.table('trafficSignal').get(chosenSignal.toString()).update({socketId: socket.id}).run(function(err,response){
-            if(err){
+            if(err){nearest[domu].sid
                console.log('error updating socket id')
             }
             else{
@@ -126,7 +126,7 @@ io.on('connection',function(socket){
     })
 
     socket.on('createPiSignal',function(num){
-        pisig.push(num);
+        pisig.push(parseINT(num))
     })
 
 
@@ -139,7 +139,6 @@ io.on('connection',function(socket){
     
 
     function firstcoord(loclat,loclong){
-         socket.emit('EVP',"Done!")
          console.log("latitude: "+ loclat)
          console.log("longitude: "+ loclong)
          console.log("Calculating distances to traffic signal")
@@ -213,7 +212,12 @@ io.on('connection',function(socket){
            var aside = sside+1;
            console.log("Signal Side "+ aside)
            console.log("Requesting to grant green")
-           console.log("alalalal"+sid);
+           if(sid == 1001){
+              socket.emit('sig1',aside);
+           }
+           if(sid == 1002){
+              socket.emit('sig2',aside);
+           }
            r.table('trafficSignal').get(sid).pluck('socketId').run()
            .then(function(response){
                reqside = response.socketId;
@@ -228,6 +232,7 @@ io.on('connection',function(socket){
         } 
 
         function emergencyover(){
+               socket.emit('emerover',"YAY!");
                socket.broadcast.to(reqside).emit('cleared', "restart");
                return;
 
