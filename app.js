@@ -97,6 +97,7 @@ var tomu = -1;
 var locarray = new Array()
 var locarray2 = new Array()
 var nearest = new Object()
+var pisig = new Array()
 var reqside;
 
 io.on('connection',function(socket){
@@ -122,6 +123,10 @@ io.on('connection',function(socket){
                 console.log('Socket id of signal '+ chosenSignal+' updated')
             }
         })
+    })
+
+    socket.on('createPiSignal',function(num){
+        pisig.push(num);
     })
 
 
@@ -208,6 +213,7 @@ io.on('connection',function(socket){
            var aside = sside+1;
            console.log("Signal Side "+ aside)
            console.log("Requesting to grant green")
+           console.log("alalalal"+sid);
            r.table('trafficSignal').get(sid).pluck('socketId').run()
            .then(function(response){
                reqside = response.socketId;
