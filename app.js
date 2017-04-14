@@ -126,7 +126,8 @@ io.on('connection',function(socket){
     })
 
     socket.on('createPiSignal',function(num){
-        pisig.push(parseINT(num))
+        pisig.push(parseInt(num))
+        console.log(num);
     })
 
 
@@ -212,11 +213,13 @@ io.on('connection',function(socket){
            var aside = sside+1;
            console.log("Signal Side "+ aside)
            console.log("Requesting to grant green")
+           console.log("SID:"+sid)
+           console.log(typeof(sid))
            if(sid == 1001){
-              socket.emit('sig1',aside);
+              io.sockets.emit('sig1',aside);
            }
            if(sid == 1002){
-              socket.emit('sig2',aside);
+              io.sockets.emit('sig2',aside);
            }
            r.table('trafficSignal').get(sid).pluck('socketId').run()
            .then(function(response){
@@ -232,7 +235,7 @@ io.on('connection',function(socket){
         } 
 
         function emergencyover(){
-               socket.emit('emerover',"YAY!");
+               io.sockets.emit('emerover',"YAY!");
                socket.broadcast.to(reqside).emit('cleared', "restart");
                return;
 
